@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="전용 열람 링크로 여는 비공개 리포트입니다.">
+  <title>비공개 리포트</title>
+  <style>
+    :root{color-scheme:light;--paper:#f7f4ed;--ink:#29322c;--muted:#697267;--line:#d8ded0;--green:#607b5d;--water:#477e86;--rust:#b87b61;--serif:Georgia,"Batang","바탕",serif;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+    *{box-sizing:border-box}html,body{width:100%;min-height:100%;margin:0}body{background:var(--paper);color:var(--ink);font:14px/1.85 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}button{font:inherit}button:focus-visible{outline:3px solid var(--water);outline-offset:5px}::selection{background:#dce6d6}[hidden]{display:none!important}.entry{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:44px 24px}.card{max-width:520px;width:100%;text-align:center}.mark{position:relative;width:148px;height:148px;margin:0 auto 35px}.orbit{position:absolute;inset:0;border:1px dashed #cfd6c7;border-radius:50%}.shape{position:absolute;width:63px;height:63px;border:1px solid;border-radius:50%;opacity:.83}.shape:nth-of-type(2){left:25px;top:23px;background:#dbe5d5;border-color:#8b9f7e}.shape:nth-of-type(3){right:17px;top:42px;background:#dbe8e5;border-color:#86a29f}.shape:nth-of-type(4){left:41px;bottom:15px;background:#ebdfd0;border-color:#bba084}.center-dot{position:absolute;left:70px;top:69px;width:8px;height:8px;border-radius:50%;background:#f7f4ed;border:1px solid #7e8b72}.eyebrow{font-size:10px;letter-spacing:.19em;color:var(--green);font-weight:600;margin:0 0 15px}.card h1{font-family:var(--serif);font-size:43px;line-height:1.35;letter-spacing:-.05em;font-weight:400;margin:0 0 21px}.message{font-size:14px;line-height:1.95;color:var(--muted);margin:0 auto;max-width:420px;min-height:55px}.detail{font-size:12px;line-height:1.85;color:var(--muted);margin:17px auto 0;max-width:390px}.divider{width:32px;height:1px;background:#c8d1bf;margin:28px auto 22px}.privacy{font-size:11px;line-height:1.9;color:#788171;margin:0}.retry{margin-top:24px;padding:10px 25px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);border-radius:7px;cursor:pointer;font-size:12px;transition:background .15s}.retry:hover{background:#435044}.loading .orbit{animation:turn 12s linear infinite}.loading .message::after{content:"";display:block;width:25px;height:3px;border-radius:3px;background:var(--green);margin:14px auto 0;animation:pulse 1.3s ease-in-out infinite}.report-frame{position:fixed;inset:0;display:block;width:100vw;height:100vh;height:100dvh;border:0;background:var(--paper)}body.has-report{height:100vh;height:100dvh;overflow:hidden}.noscript{margin:20px 0;padding:16px;border:1px solid var(--line);border-radius:9px;font-size:12px;color:var(--muted)}@keyframes turn{to{transform:rotate(360deg)}}@keyframes pulse{50%{opacity:.35;transform:scaleX(.65)}}@media(max-width:480px){.entry{padding:32px 22px}.mark{width:132px;height:132px;margin-bottom:30px}.shape{width:58px;height:58px}.shape:nth-of-type(2){left:21px;top:20px}.shape:nth-of-type(3){right:13px;top:35px}.shape:nth-of-type(4){left:35px;bottom:12px}.center-dot{left:62px;top:61px}.card h1{font-size:35px}.message{font-size:13px}.detail{font-size:11px}.privacy{font-size:10px}.eyebrow{font-size:9px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}@media print{.entry{min-height:auto;padding:30px}.report-frame{position:static;width:100%;height:100vh}}
+  </style>
+</head>
+<body>
+  <main class="entry" id="entry">
+    <section class="card" aria-labelledby="entry-title">
+      <div class="mark" aria-hidden="true"><span class="orbit"></span><span class="shape"></span><span class="shape"></span><span class="shape"></span><span class="center-dot"></span></div>
+      <p class="eyebrow">PRIVATE READING</p>
+      <h1 id="entry-title">비공개 리포트</h1>
+      <p class="message" id="message" role="status" aria-live="polite">저장소의 전용 열람 링크로 열어주세요.</p>
+      <p class="detail" id="detail">전용 링크가 있어야 내용을 볼 수 있습니다.</p>
+      <button class="retry" id="retry" type="button" hidden>다시 불러오기</button>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="privacy">내용은 이 브라우저 안에서 열립니다.<br>열람 키는 서버로 보내지 않습니다.</p>
+      <noscript><p class="noscript">리포트를 열려면 브라우저에서 JavaScript를 켜주세요.</p></noscript>
+    </section>
+  </main>
+  <iframe class="report-frame" id="report" title="비공개 리포트 본문" sandbox="allow-scripts allow-modals allow-downloads allow-popups" referrerpolicy="no-referrer" hidden></iframe>
+  <script>
+    'use strict';
+    const entry = document.getElementById('entry');
+    const message = document.getElementById('message');
+    const detail = document.getElementById('detail');
+    const retry = document.getElementById('retry');
+    const report = document.getElementById('report');
+    let loading = false;
+
+    function displayState(text, explanation, canRetry = false) {
+      document.body.classList.remove('loading');
+      message.textContent = text;
+      detail.textContent = explanation;
+      retry.hidden = !canRetry;
+    }
+
+    function decodeBase64Url(value) {
+      if (typeof value !== 'string' || !/^[A-Za-z0-9_-]+$/.test(value)) throw new Error('invalid encoding');
+      const padded = value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - value.length % 4) % 4);
+      const decoded = atob(padded);
+      return Uint8Array.from(decoded, character => character.charCodeAt(0));
+    }
+
+    async function openReport() {
+      if (loading) return;
+      const keyText = new URLSearchParams(window.location.hash.slice(1)).get('key');
+      if (!keyText) {
+        displayState('저장소의 전용 열람 링크로 열어주세요.', '전용 링크가 있어야 내용을 볼 수 있습니다.');
+        return;
+      }
+      if (!window.isSecureContext || !window.crypto || !window.crypto.subtle) {
+        displayState('이 환경에서는 리포트를 열 수 없어요.', '최신 브라우저에서 HTTPS로 시작하는 전용 링크를 다시 열어주세요.');
+        return;
+      }
+
+      let keyBytes;
+      try {
+        if (!/^[A-Za-z0-9_-]{43}$/.test(keyText)) throw new Error('invalid key');
+        keyBytes = decodeBase64Url(keyText);
+        if (keyBytes.byteLength !== 32) throw new Error('invalid key');
+      } catch {
+        displayState('열람 링크를 확인할 수 없어요.', '저장소에 있는 전용 링크 전체를 다시 열어주세요.');
+        return;
+      }
+
+      loading = true;
+      retry.hidden = true;
+      document.body.classList.add('loading');
+      message.textContent = '리포트를 안전하게 열고 있어요.';
+      detail.textContent = '잠시만 기다려주세요.';
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 20000);
+      let payload;
+
+      try {
+        const response = await fetch('./report.enc.json', {
+          cache: 'no-store',
+          credentials: 'same-origin',
+          mode: 'same-origin',
+          referrerPolicy: 'no-referrer',
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error('unavailable');
+        payload = await response.json();
+      } catch {
+        keyBytes.fill(0);
+        loading = false;
+        window.clearTimeout(timeout);
+        displayState('자료를 불러오지 못했어요.', '인터넷 연결을 확인한 뒤 다시 불러오거나, 잠시 후 전용 링크를 열어주세요.', true);
+        return;
+      } finally {
+        window.clearTimeout(timeout);
+      }
+
+      try {
+        if (!payload || payload.v !== 1) throw new Error('unsupported payload');
+        const iv = decodeBase64Url(payload.iv);
+        const ciphertext = decodeBase64Url(payload.ciphertext);
+        if (iv.byteLength !== 12 || ciphertext.byteLength < 17) throw new Error('invalid payload');
+        const cryptoKey = await window.crypto.subtle.importKey('raw', keyBytes, {name: 'AES-GCM'}, false, ['decrypt']);
+        keyBytes.fill(0);
+        const plaintext = await window.crypto.subtle.decrypt({name: 'AES-GCM', iv, tagLength: 128}, cryptoKey, ciphertext);
+        const reportHtml = new TextDecoder('utf-8', {fatal: true}).decode(plaintext);
+        new Uint8Array(plaintext).fill(0);
+        if (!/<!doctype\s+html\b/i.test(reportHtml) || !/<html\b/i.test(reportHtml)) throw new Error('invalid document');
+
+        // Downloads remain available from the private repository; this view stays sandboxed.
+        const displayHtml = reportHtml
+          .replace(/<head\b[^>]*>/i, '$&<base href="about:srcdoc"><style>.save-link{display:none!important}</style>');
+        report.addEventListener('load', () => {
+          entry.hidden = true;
+          report.hidden = false;
+          document.body.classList.remove('loading');
+          document.body.classList.add('has-report');
+          report.focus();
+        }, {once: true});
+        report.srcdoc = displayHtml;
+        // The key stays out of HTTP requests and is removed from the visible URL after decryption.
+        try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch {}
+      } catch {
+        keyBytes.fill(0);
+        displayState('이 리포트를 열 수 없어요.', '저장소의 전용 링크를 다시 열어주세요. 링크가 바뀌었다면 최신 링크가 필요합니다.');
+      } finally {
+        loading = false;
+      }
+    }
+
+    retry.addEventListener('click', openReport);
+    window.addEventListener('hashchange', () => { if (report.hidden) openReport(); });
+    openReport();
+  </script>
+</body>
+</html>
