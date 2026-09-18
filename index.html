@@ -32,6 +32,19 @@
 @media(max-width:520px){.caution-box{padding:19px 18px}.caution-box h4{font-size:19px}}
 @media print{.caution-box{background:#fff9f3;border:1px solid #c8aa92;padding:12px 15px;break-inside:avoid}.caution-box h4{font-size:13pt}.caution-box p,.caution-box li,.caution-box dd{font-size:9pt}.caution-box dt,.caution-box .caution-assumption{font-size:8pt}.map-card{position:static}.print-pair{break-inside:auto!important}}
 /* CAUTION_STYLES_END */
+  
+/* MBTI_STYLES_START */
+.mbti-badge{display:block;margin-top:14px;padding-top:11px;border-top:1px solid var(--line);font-size:10px;line-height:1.7;color:#556c68;letter-spacing:.015em}
+.mbti-badge b{display:block;font-size:12px;letter-spacing:.07em;font-weight:600;color:#304f4a;margin-top:2px}
+.mbti-note{font-size:11px;line-height:1.9;color:var(--muted);margin:16px 1px 0}.mbti-note strong{color:#415d57}
+.mbti-panel{grid-column:1/-1;background:#edf3f0;border:1px solid #cbdcd4;border-radius:9px;padding:23px 25px}
+.mbti-panel .small-label{color:#42685c}.mbti-types{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.mbti-type{font-family:var(--sans);font-size:22px;letter-spacing:.1em;font-weight:600;line-height:1.2;color:#315e51}.mbti-or{font-size:11px;color:#668074}
+.mbti-panel h4{font-family:var(--serif);font-weight:400;font-size:19px;line-height:1.6;color:#315648;margin:0 0 8px}
+.mbti-panel p{font-size:12px;color:#4c6259;line-height:1.9;margin:0}.mbti-question{margin-top:14px!important;border-top:1px solid #cbdcd4;padding-top:13px}.mbti-question strong{display:block;font-size:10px;color:#42685c;margin-bottom:5px}
+@media(max-width:520px){.mbti-panel{padding:20px 18px}.mbti-type{font-size:20px}.mbti-panel h4{font-size:18px}.mbti-badge b{font-size:11px}}
+@media print{.mbti-panel{background:#f4f8f5;padding:12px 15px;margin:15px 0;break-inside:avoid}.mbti-type{font-size:14pt}.mbti-panel h4{font-size:12pt}.mbti-panel p{font-size:9pt}.mbti-note{font-size:8pt}.print-profile{break-inside:auto}}
+/* MBTI_STYLES_END */
   </style>
 </head>
 <body>
@@ -50,6 +63,7 @@
       <section class="section" aria-labelledby="profiles-heading">
         <div class="section-heading"><div class="section-title"><span class="section-number">01</span><h2 id="profiles-heading">네 사람의 기본 결</h2></div><p class="section-caption">카드를 누르면 각자의 해석을 펼쳐볼 수 있어요.<br>일간은 명식에서 자신을 상징하는 중심 글자입니다.</p></div>
         <div class="profile-grid" id="profile-grid" aria-label="인물 선택"></div>
+        <p class="mbti-note" id="mbti-note"><strong>MBTI는 재미로 붙인 후보입니다.</strong> 출생 정보로 MBTI를 알 수는 없어요. 앞서 만든 성향 묘사에 어울리는 캐릭터를 비유했으며, 실제 자기보고나 검사 결과는 확인하지 않았습니다. 두 후보에 우선순위는 없습니다.</p>
         <div id="profile-detail" class="profile-detail" role="region" aria-live="polite" aria-label="선택한 인물의 상세 해석"></div>
         <div class="print-content" id="print-profiles"></div>
       </section>
@@ -107,6 +121,15 @@ const reportData = {
         "pattern": "완성도를 챙긴다는 이유로 이미 합의한 결과를 계속 뜯어고친다면, 상대는 해도 해도 끝이 없다고 느낄 수 있습니다. 원하는 기준은 말하지 않은 채 수정만 요구하면, 협의가 눈치 보기로 바뀔 수 있습니다.",
         "signal": "완료 기준에 없던 수정을 마지막에 추가하거나, 이유를 설명하지 않고 같은 부분을 여러 번 되돌리는지 확인합니다.",
         "repair": "시작 전에 꼭 지킬 기준을 세 가지 이내로 정하고, 뒤늦게 생긴 취향 차이는 다음 개선 목록에 남깁니다. 기준을 바꿔야 한다면 일정과 범위도 함께 다시 합의합니다."
+      },
+      "mbti": {
+        "types": [
+          "INFJ",
+          "INTJ"
+        ],
+        "impression": "의도와 완성도를 끝까지 다듬는 캐릭터",
+        "reason": "앞서 쓴 “의도와 완성도를 살피고 자기 기준을 지키는 모습”에서 연상한 두 후보입니다. 실제 성향을 관찰해 고른 결과는 아닙니다.",
+        "question": "결정할 때 기준의 일관성과 사람들에게 미치는 영향 중 무엇부터 검토하는 편이야?"
       }
     },
     {
@@ -136,6 +159,15 @@ const reportData = {
         "pattern": "분위기를 지키려고 어려운 부탁에도 괜찮다고 한다면, 상대는 그 말을 실제 약속으로 받아들일 수 있습니다. 불만을 말하지 않고 쌓아두다가 나중에 물러나면, 상대는 갑자기 태도가 바뀌었다고 느낄 수 있습니다.",
         "signal": "요청을 받을 때는 동의했다가 뒤늦게 조건을 붙이거나, 불편함을 당사자보다 다른 사람에게 먼저 말하는지 확인합니다.",
         "repair": "바로 수락하기 전에 가능한 범위와 어려운 부분을 함께 말합니다. 거절이 필요하면 답을 미루지 말고, 가능한 대안이 있을 때만 덧붙입니다."
+      },
+      "mbti": {
+        "types": [
+          "INFP",
+          "ENFP"
+        ],
+        "impression": "사람의 이야기를 유연하게 연결하는 캐릭터",
+        "reason": "앞서 쓴 “다른 이야기를 연결하고 상황에 맞춰 표현을 바꾸는 모습”에서 떠올린 후보입니다. 조율한다는 묘사만으로 실제 F나 E를 알 수는 없습니다.",
+        "question": "생각이 복잡할 때 혼자 정리한 뒤 말하는 편이야, 누군가와 이야기하며 정리하는 편이야?"
       }
     },
     {
@@ -165,6 +197,15 @@ const reportData = {
         "pattern": "결론이 분명하다는 이유로 설명 도중 말을 끊거나 반론을 끝내려 한다면, 상대는 내용을 검토받기 전에 무시당했다고 느낄 수 있습니다. 의견 차이를 누가 더 잘 아느냐의 문제로 바꾸면, 필요한 이견까지 사라질 수 있습니다.",
         "signal": "상대가 근거를 다 말하기 전에 결론을 내리거나, 한 번 반대한 사람이 이후 대화에서 침묵하는지 확인합니다.",
         "repair": "반론을 듣기 전에 상대 주장을 한 문장으로 요약해 확인합니다. 결론을 낼 때는 이유와 함께, 어떤 새 정보가 있으면 판단을 바꿀지도 말합니다."
+      },
+      "mbti": {
+        "types": [
+          "ENTJ",
+          "ESTJ"
+        ],
+        "impression": "방향과 결론을 분명히 말하는 캐릭터",
+        "reason": "앞서 쓴 “기준과 결론을 명확하게 드러내는 모습”에 붙여본 후보입니다. 실제 외향성이나 리더십을 판단한 것은 아닙니다.",
+        "question": "낯선 문제를 만나면 구체적인 사례부터 확인하는 편이야, 전체 구조와 가능성부터 그리는 편이야?"
       }
     },
     {
@@ -194,6 +235,15 @@ const reportData = {
         "pattern": "가능성을 놓치기 싫어 여러 일을 동시에 맡는다면, 약속한 범위보다 실제로 감당할 수 있는 범위가 작아질 수 있습니다. 부담을 혼자 해결하려다 공유를 늦추면, 상대는 문제가 커진 뒤에야 상황을 알게 될 수 있습니다.",
         "signal": "새 부탁을 받으면서 기존 약속을 다시 조정하지 않거나, 지연이 예상되는데도 괜찮다고 답하는지 확인합니다.",
         "repair": "새 일을 맡기 전에 현재 약속을 함께 확인하고, 추가할 일만큼 미루거나 줄일 일을 정합니다. 지연이 예상되면 확정될 때까지 기다리지 말고 영향과 대안을 먼저 알립니다."
+      },
+      "mbti": {
+        "types": [
+          "ENFP",
+          "ENTP"
+        ],
+        "impression": "여러 가능성과 새로운 연결을 펼치는 캐릭터",
+        "reason": "앞서 쓴 “여러 가능성을 떠올리고 생각의 범위를 넓히는 모습”에서 연상한 후보입니다. 실제 E/I나 F/T는 확인되지 않았습니다.",
+        "question": "새 아이디어를 고를 때 내가 중요하게 여기는 가치와 기준의 일관성 중 무엇부터 따져보는 편이야?"
       }
     }
   ],
@@ -436,7 +486,7 @@ const reportData = {
     ]
   },
   "scope": {
-    "intro": "모두 한국 출생·양력이며, 전달된 시간은 당시 시계에 표시된 시간으로 가정했습니다. 구체적인 출생 도시와 시간의 정확도는 확인되지 않아 년·월·일주 중심으로 읽었습니다. 관계는 일간의 오행 생·극·동일과 천간오합, 일지의 육합·충을 먼저 비교했습니다. 월지나 다른 위치를 비교한 확장 관계는 카드의 근거에 따로 표시했습니다. 대표 관계를 골라 보여주며 모든 합·충·형·파·해를 망라하지 않습니다. 합의 대응쌍이 있어도 합화 성립을 판정하지 않고, 여러 사람의 글자를 합쳐 새로운 원국이나 삼합국으로 보지 않습니다. 직설적인 주의점은 전통 상징을 참고해 만든 행동 점검 가설입니다. 사주로 실제 성격·행실이나 갈등을 입증한 것이 아니며, 대화 예시는 실제 발언이 아닙니다. 실제로 반복되는 행동이 있는지 서로 확인해 적용하세요.",
+    "intro": "모두 한국 출생·양력이며, 전달된 시간은 당시 시계에 표시된 시간으로 가정했습니다. 구체적인 출생 도시와 시간의 정확도는 확인되지 않아 년·월·일주 중심으로 읽었습니다. 관계는 일간의 오행 생·극·동일과 천간오합, 일지의 육합·충을 먼저 비교했습니다. 월지나 다른 위치를 비교한 확장 관계는 카드의 근거에 따로 표시했습니다. 대표 관계를 골라 보여주며 모든 합·충·형·파·해를 망라하지 않습니다. 합의 대응쌍이 있어도 합화 성립을 판정하지 않고, 여러 사람의 글자를 합쳐 새로운 원국이나 삼합국으로 보지 않습니다. 직설적인 주의점은 전통 상징을 참고해 만든 행동 점검 가설입니다. 사주로 실제 성격·행실이나 갈등을 입증한 것이 아니며, 대화 예시는 실제 발언이 아닙니다. 실제로 반복되는 행동이 있는지 서로 확인해 적용하세요. MBTI 후보는 앞선 가상 성향 묘사를 유형에 비유한 놀이용 라벨입니다. 출생 정보로 MBTI를 산출하거나 실제 유형을 추정하지 않으며, 본인의 응답이나 검사 결과는 받지 않았습니다. 후보 간 우선순위·확률은 없고, 질문 한 개로 유형을 판정하지 않습니다.",
     "timeNotes": [
       "오진호: 1987년 서머타임을 반영하면 오후 3시는 표준시 오후 2시이며 시주는 계미로 봅니다.",
       "정다솔: 1988년 서머타임을 반영하면 오전 9시는 표준시 오전 8시이며 시주는 갑진으로 봅니다.",
@@ -500,6 +550,11 @@ const reportData = {
       "label": "식전고적 · 삼명통회 지원육합",
       "url": "https://www.shidianguji.com/zh/book/SK1610/chapter/1kf5v6ol1yasl",
       "note": "육합 규칙을 별도 원문 전사본에서 교차 확인했습니다. 문헌 근거는 성격·궁합을 과학적으로 검증한 근거가 아닙니다."
+    },
+    {
+      "label": "Myers & Briggs Foundation · 본인에게 맞는 유형 확인",
+      "url": "https://www.myersbriggs.org/unique-features-of-myers-briggs/best-fit-type/",
+      "note": "공식 MBTI의 본인 응답과 유형 확인 과정 안내입니다. 이 페이지의 재미용 후보를 뒷받침하는 근거는 아닙니다."
     }
   ]
 };
@@ -531,9 +586,20 @@ const reportData = {
     }
 /* CAUTION_RENDERERS_END */
 
+
+/* MBTI_RENDERERS_START */
+    function mbtiBadge(member){
+      return member.mbti?'<span class="mbti-badge">MBTI 후보 · 재미용<b>'+member.mbti.types.map(escapeHtml).join(' · ')+'</b></span>':'';
+    }
+    function memberMbti(member){
+      const m=member.mbti;if(!m)return '';
+      return '<section class="mbti-panel"><span class="small-label">MBTI로 비유한 캐릭터 후보 · 실제 유형 미확인</span><div class="mbti-types">'+m.types.map(code=>'<span class="mbti-type">'+escapeHtml(code)+'</span>').join('<span class="mbti-or">또는</span>')+'</div><h4>'+escapeHtml(m.impression)+'</h4><p>'+escapeHtml(m.reason)+'</p><p class="mbti-question"><strong>본인에게 물어보기 · 한 질문으로 유형을 판정하지 않습니다</strong>'+escapeHtml(m.question)+'</p></section>';
+    }
+/* MBTI_RENDERERS_END */
+
     function renderProfiles(){
-      document.getElementById('profile-grid').innerHTML=reportData.members.map((member,index)=>{const color=colorFor(member);return `<button type="button" class="profile-card" style="--accent:${color.color};--tint:${color.tint}" data-member="${escapeHtml(member.id)}" aria-pressed="${member.id===selectedProfile}" aria-controls="profile-detail" aria-label="${escapeHtml(member.name)} 상세 해석 보기"><span class="profile-top"><span class="profile-index">PERSON / 0${index+1}</span><span class="profile-arrow" aria-hidden="true">↗</span></span><span class="profile-sign"><span class="stem-symbol" aria-hidden="true">${escapeHtml(member.symbol)}</span><span><span class="profile-name">${escapeHtml(member.name)}</span><span class="profile-stem">${escapeHtml(member.stem)}</span></span></span><span class="profile-subtitle">${escapeHtml(member.subtitle)}</span><span class="profile-pillars" aria-label="년주 월주 일주">${member.pillars.map(pillar=>`<span>${escapeHtml(pillar)}</span>`).join('')}</span></button>`}).join('');
-      document.getElementById('print-profiles').innerHTML=reportData.members.map(member=>`<article class="print-profile"><h3>${escapeHtml(member.name)} · ${escapeHtml(member.stem)} — ${escapeHtml(member.subtitle)}</h3><p>${escapeHtml(member.pillars.join(' / '))}</p><p><strong>${escapeHtml(member.intro)}</strong></p><p>${escapeHtml(member.reading)}</p><p class="print-reflection">함께 물어보기: ${escapeHtml(member.reflection)}</p>${memberCaution(member)}</article>`).join('');
+      document.getElementById('profile-grid').innerHTML=reportData.members.map((member,index)=>{const color=colorFor(member);return `<button type="button" class="profile-card" style="--accent:${color.color};--tint:${color.tint}" data-member="${escapeHtml(member.id)}" aria-pressed="${member.id===selectedProfile}" aria-controls="profile-detail" aria-label="${escapeHtml(member.name)} 상세 해석 보기"><span class="profile-top"><span class="profile-index">PERSON / 0${index+1}</span><span class="profile-arrow" aria-hidden="true">↗</span></span><span class="profile-sign"><span class="stem-symbol" aria-hidden="true">${escapeHtml(member.symbol)}</span><span><span class="profile-name">${escapeHtml(member.name)}</span><span class="profile-stem">${escapeHtml(member.stem)}</span></span></span><span class="profile-subtitle">${escapeHtml(member.subtitle)}</span><span class="profile-pillars" aria-label="년주 월주 일주">${member.pillars.map(pillar=>`<span>${escapeHtml(pillar)}</span>`).join('')}</span>${mbtiBadge(member)}</button>`}).join('');
+      document.getElementById('print-profiles').innerHTML=reportData.members.map(member=>`<article class="print-profile"><h3>${escapeHtml(member.name)} · ${escapeHtml(member.stem)} — ${escapeHtml(member.subtitle)}</h3><p>${escapeHtml(member.pillars.join(' / '))}</p><p><strong>${escapeHtml(member.intro)}</strong></p><p>${escapeHtml(member.reading)}</p><p class="print-reflection">함께 물어보기: ${escapeHtml(member.reflection)}</p>${memberMbti(member)}${memberCaution(member)}</article>`).join('');
       updateProfile(selectedProfile,false);
     }
     function updateProfile(id,animate=true){
@@ -541,7 +607,7 @@ const reportData = {
       const member=byId[id],color=colorFor(member),panel=document.getElementById('profile-detail');
       document.querySelectorAll('[data-member]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.member===id)));
       panel.style.setProperty('--accent',color.color);
-      panel.innerHTML=`<div><span class="small-label">${escapeHtml(member.name)}의 이야기</span><h3>${escapeHtml(member.intro)}</h3><p>${escapeHtml(member.reading)}</p></div><div class="reflection"><span class="small-label">함께 물어보기</span><p>${escapeHtml(member.reflection)}</p></div>${memberCaution(member)}`;
+      panel.innerHTML=`<div><span class="small-label">${escapeHtml(member.name)}의 이야기</span><h3>${escapeHtml(member.intro)}</h3><p>${escapeHtml(member.reading)}</p></div><div class="reflection"><span class="small-label">함께 물어보기</span><p>${escapeHtml(member.reflection)}</p></div>${memberMbti(member)}${memberCaution(member)}`;
       if(animate){panel.classList.remove('fade-in');void panel.offsetWidth;panel.classList.add('fade-in')}
     }
     const nodePositions={dasol:{x:250,y:67},jinho:{x:409,y:220},manwoo:{x:91,y:220},yoongi:{x:250,y:373}};
